@@ -1,0 +1,2829 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="27">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>635</ID>
+      <Description>"------------------------"</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>641</ID>
+          <Description>"CT VER: 21.1.0"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>640</ID>
+      <Description>"------------------------"</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>672</ID>
+      <Description>"Scripts"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>7</ID>
+          <Description>"Edit Player"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : PES2021.exe
+  Version:
+  Date   : 2020-09-16
+  Author : Aranaktu
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+
+
+aobscanmodule(INJECT_ptrPlayer,PES2021.exe,CB B8 02 00 00 00 0F 1F 40 00 66 0F 1F 84 00 00 00 00 00 0F 10 02 0F 11 01) // should be unique
+alloc(newmem,$1000,"PES2021.exe"+C650F0)
+
+alloc(ptrPlayer, 8, "PES2021.exe"+C650F0)
+registersymbol(ptrPlayer)
+ptrPlayer:
+dq 00
+
+label(code)
+label(return)
+
+newmem:
+  cmp eax, 2
+  jne code
+  mov [ptrPlayer], rdx
+
+code:
+  movups xmm0,[rdx]
+  movups [rcx],xmm0
+  jmp return
+
+INJECT_ptrPlayer+13:
+  jmp newmem
+  nop
+return:
+registersymbol(INJECT_ptrPlayer)
+
+aobscanmodule(INJECT_ptrPlayerTwo,PES2021.exe,48 8B 40 2C 48 89 02) // should be unique
+alloc(newmem_ptrPlayerTwo,$1000,"PES2021.exe"+730FFA7)
+
+label(code_ptrPlayerTwo)
+label(ret_ptrPlayerTwo)
+
+newmem_ptrPlayerTwo:
+  mov [ptrPlayer], rax
+
+code_ptrPlayerTwo:
+  mov rax,[rax+2C]
+  mov [rdx],rax
+  jmp ret_ptrPlayerTwo
+
+INJECT_ptrPlayerTwo:
+  jmp newmem_ptrPlayerTwo
+  nop
+  nop
+ret_ptrPlayerTwo:
+registersymbol(INJECT_ptrPlayerTwo)
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+INJECT_ptrPlayer+13:
+  db 0F 10 02 0F 11 01
+
+unregistersymbol(INJECT_ptrPlayer)
+dealloc(newmem)
+
+//code_ptrPlayerTwo from here till the end of the code_ptrPlayerTwo will be used to disable the cheat
+INJECT_ptrPlayerTwo:
+  db 48 8B 40 2C 48 89 02
+
+unregistersymbol(INJECT_ptrPlayerTwo)
+dealloc(newmem_ptrPlayerTwo)
+
+unregistersymbol(ptrPlayer)
+dealloc(ptrPlayer)
+
+{
+// ORIGINAL CODE - INJECT_ptrPlayerION POINT: "PES2021.exe"+C650F0
+
+"PES2021.exe"+C650C3: 90                          -  nop
+"PES2021.exe"+C650C4: E9 6B 03 00 00              -  jmp PES2021.exe+C65434
+"PES2021.exe"+C650C9: 48 8B 96 98 00 00 00        -  mov rdx,[rsi+00000098]
+"PES2021.exe"+C650D0: 48 8B CF                    -  mov rcx,rdi
+"PES2021.exe"+C650D3: E8 F8 AE 81 00              -  call PES2021.exe+147FFD0
+"PES2021.exe"+C650D8: 48 8B D0                    -  mov rdx,rax
+"PES2021.exe"+C650DB: 48 8B CB                    -  mov rcx,rbx
+"PES2021.exe"+C650DE: B8 02 00 00 00              -  mov eax,00000002
+"PES2021.exe"+C650E3: 0F 1F 40 00                 -  nop [rax+00]
+"PES2021.exe"+C650E7: 66 0F 1F 84 00 00 00 00 00  -  nop [rax+rax+00000000]
+// ---------- INJECT_ptrPlayerING HERE ----------
+"PES2021.exe"+C650F0: 0F 10 02                    -  movups xmm0,[rdx]
+"PES2021.exe"+C650F3: 0F 11 01                    -  movups [rcx],xmm0
+// ---------- DONE INJECT_ptrPlayerING  ----------
+"PES2021.exe"+C650F6: 0F 10 4A 10                 -  movups xmm1,[rdx+10]
+"PES2021.exe"+C650FA: 0F 11 49 10                 -  movups [rcx+10],xmm1
+"PES2021.exe"+C650FE: 0F 10 42 20                 -  movups xmm0,[rdx+20]
+"PES2021.exe"+C65102: 0F 11 41 20                 -  movups [rcx+20],xmm0
+"PES2021.exe"+C65106: 0F 10 4A 30                 -  movups xmm1,[rdx+30]
+"PES2021.exe"+C6510A: 0F 11 49 30                 -  movups [rcx+30],xmm1
+"PES2021.exe"+C6510E: 0F 10 42 40                 -  movups xmm0,[rdx+40]
+"PES2021.exe"+C65112: 0F 11 41 40                 -  movups [rcx+40],xmm0
+"PES2021.exe"+C65116: 0F 10 4A 50                 -  movups xmm1,[rdx+50]
+"PES2021.exe"+C6511A: 0F 11 49 50                 -  movups [rcx+50],xmm1
+}
+
+
+{
+// ORIGINAL code_ptrPlayerTwo - INJECT_ptrPlayerTwoION POINT: "PES2021.exe"+730FFA7
+
+"PES2021.exe"+730FF86: FF E7                 -  jmp rdi
+"PES2021.exe"+730FF88: C6                    -  db -3A
+"PES2021.exe"+730FF89: 0F 1F 80 00 00 00 00  -  nop [rax+00000000]
+"PES2021.exe"+730FF90: 48 8B 41 08           -  mov rax,[rcx+08]
+"PES2021.exe"+730FF94: 48 85 C0              -  test rax,rax
+"PES2021.exe"+730FF97: 75 0E                 -  jne PES2021.exe+730FFA7
+"PES2021.exe"+730FF99: 48 8B 05 40 FE 17 FC  -  mov rax,[PES2021.exe+348FDE0]
+"PES2021.exe"+730FFA0: 48 89 02              -  mov [rdx],rax
+"PES2021.exe"+730FFA3: 48 89 D0              -  mov rax,rdx
+"PES2021.exe"+730FFA6: C3                    -  ret
+// ---------- INJECT_ptrPlayerTwoING HERE ----------
+"PES2021.exe"+730FFA7: 48 8B 40 2C           -  mov rax,[rax+2C]
+"PES2021.exe"+730FFAB: 48 89 02              -  mov [rdx],rax
+// ---------- DONE INJECT_ptrPlayerTwoING  ----------
+"PES2021.exe"+730FFAE: 48 89 D0              -  mov rax,rdx
+"PES2021.exe"+730FFB1: C3                    -  ret
+"PES2021.exe"+730FFB2: 4C 8B 1C 24           -  mov r11,[rsp]
+"PES2021.exe"+730FFB6: 4D 89 DD              -  mov r13,r11
+"PES2021.exe"+730FFB9: 48 8D 64 24 08        -  lea rsp,[rsp+08]
+"PES2021.exe"+730FFBE: 4C 8B 04 24           -  mov r8,[rsp]
+"PES2021.exe"+730FFC2: 48 83 EC F8           -  sub rsp,-08
+"PES2021.exe"+730FFC6: E9 45 F8 5D 0E        -  jmp PES2021.exe+158EF810
+"PES2021.exe"+730FFCB: 48 31 D2              -  xor rdx,rdx
+"PES2021.exe"+730FFCE: 56                    -  push rsi
+}
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>52</ID>
+              <Description>"Better Don't change :)"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>11</ID>
+                  <Description>"start"</Description>
+                  <ShowAsHex>1</ShowAsHex>
+                  <VariableType>8 Bytes</VariableType>
+                  <Address>ptrPlayer</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>12</ID>
+                  <Description>"end (start+17C)"</Description>
+                  <ShowAsHex>1</ShowAsHex>
+                  <VariableType>8 Bytes</VariableType>
+                  <Address>ptrPlayer</Address>
+                  <Offsets>
+                    <Offset>17C</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>8</ID>
+                  <Description>"Player ID"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>ptrPlayer</Address>
+                  <Offsets>
+                    <Offset>30</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>531</ID>
+                  <Description>"Team (?)"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>2 Bytes</VariableType>
+                  <Address>ptrPlayer</Address>
+                  <Offsets>
+                    <Offset>12C</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>530</ID>
+                  <Description>"League (?)"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>2 Bytes</VariableType>
+                  <Address>ptrPlayer</Address>
+                  <Offsets>
+                    <Offset>12E</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>53</ID>
+              <Description>"Player Info"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>58</ID>
+                  <Description>"Name"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>54</ID>
+                      <Description>"Commentary ID"</Description>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>34</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>25</ID>
+                      <Description>"Player Name"</Description>
+                      <VariableType>String</VariableType>
+                      <Length>15</Length>
+                      <Unicode>0</Unicode>
+                      <CodePage>0</CodePage>
+                      <ZeroTerminate>1</ZeroTerminate>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>38</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>24</ID>
+                      <Description>"Name on Strip (National Team)"</Description>
+                      <VariableType>String</VariableType>
+                      <Length>15</Length>
+                      <Unicode>0</Unicode>
+                      <CodePage>0</CodePage>
+                      <ZeroTerminate>1</ZeroTerminate>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>B2</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>23</ID>
+                      <Description>"Name on Strip (Club)"</Description>
+                      <VariableType>String</VariableType>
+                      <Length>15</Length>
+                      <Unicode>0</Unicode>
+                      <CodePage>0</CodePage>
+                      <ZeroTerminate>1</ZeroTerminate>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>75</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>148</ID>
+                  <Description>"Nationality"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0: 'None'
+1: 'Afghanistan'
+2: 'Bahrain'
+3: 'Bangladesh'
+4: 'Bhutan'
+5: 'Brunei'
+6: 'Cambodia'
+7: 'China'
+8: 'Hong Kong'
+9: 'India'
+10: 'Indonesia'
+11: 'Iran'
+12: 'Iraq'
+13: 'Japan'
+14: 'Jordan'
+15: 'North Korea'
+16: 'South Korea'
+17: 'Kuwait'
+18: 'Laos'
+19: 'Lebanon'
+20: 'Macao'
+21: 'Malaysia'
+22: 'Maldives'
+23: 'Mongolia'
+24: 'Myanmar'
+25: 'Nepal'
+26: 'Oman'
+27: 'Pakistan'
+28: 'Palestine'
+29: 'Philippines'
+30: 'Qatar'
+31: 'Saudi Arabia'
+32: 'Singapore'
+33: 'Sri Lanka'
+34: 'Syria'
+36: 'Thailand'
+37: 'Uae'
+38: 'Vietnam'
+39: 'Yemen'
+40: 'Kyrgyz Republic'
+41: 'Tajikistan'
+42: 'Turkmenistan'
+43: 'East Timor'
+44: 'Algeria'
+45: 'Angola'
+46: 'Benin'
+47: 'Botswana'
+48: 'Burkina Faso'
+49: 'Burundi'
+50: 'Cameroon'
+51: 'Cape Verde'
+52: 'Central African Rep.'
+53: 'Chad'
+54: 'The Comoros'
+55: 'Congo Dr'
+56: 'Côte d'Ivoire'
+57: 'Djibouti'
+58: 'Egypt'
+59: 'Equatorial Guinea'
+60: 'Eritrea'
+61: 'Ethiopia'
+62: 'Gabon'
+63: 'Republic of the Gambia'
+64: 'Ghana'
+65: 'Guinea'
+66: 'Guinea-Bissau'
+67: 'Kenya'
+68: 'Lesotho'
+69: 'Liberia'
+70: 'Libya'
+71: 'Madagascar'
+72: 'Malawi'
+73: 'Mali'
+74: 'Mauritania'
+75: 'Mauritius'
+76: 'Morocco'
+77: 'Mozambique'
+78: 'Namibia'
+79: 'Niger'
+80: 'Nigeria'
+81: 'Rwanda'
+82: 'Sao Tomé and Principe'
+83: 'Senegal'
+84: 'Seychelles'
+85: 'Sierra Leone'
+86: 'Somalia'
+87: 'South Africa'
+88: 'Sudan'
+89: 'Swaziland'
+90: 'Tanzania'
+91: 'Togo'
+92: 'Tunisia'
+93: 'Uganda'
+94: 'Zambia'
+95: 'Zimbabwe'
+98: 'Congo'
+100: 'Réunion'
+103: 'Anguilla'
+104: 'Antiqua and Barbuda'
+105: 'Aruba'
+106: 'The Bahamas'
+107: 'Barbados'
+108: 'Belize'
+109: 'Bermuda'
+110: 'Canada'
+111: 'Cayman Islands'
+112: 'Costa Rica'
+113: 'Cuba'
+114: 'Dominica'
+115: 'Dominican Republic'
+116: 'El Salvador'
+117: 'Grenada'
+118: 'Guadeloupe'
+119: 'Guatemala'
+120: 'Haiti'
+121: 'Honduras'
+122: 'Jamaica'
+123: 'Martinique'
+124: 'Mexico'
+125: 'Montserrat'
+126: 'Netherlands Antilles'
+127: 'Nicaragua'
+128: 'Panama'
+129: 'Puerto Rico'
+130: 'Saint Kitts and Nevis'
+131: 'Saint Lucia'
+132: 'St Vincent and Grenadines'
+133: 'Trinidad and Tobago'
+134: 'Turks and Caicos Is.'
+135: 'United States'
+136: 'British Virgin Islands'
+137: 'U.S. Virgin Islands'
+138: 'French Guiana'
+139: 'Suriname'
+140: 'Curaçao'
+144: 'Argentina'
+145: 'Bolivia'
+146: 'Brazil'
+147: 'Chile'
+148: 'Colombia'
+149: 'Ecuador'
+150: 'Paraguay'
+151: 'Peru'
+152: 'Uruguay'
+153: 'Venezuela'
+159: 'Gyuana'
+161: 'American Samoa'
+162: 'Australia'
+163: 'Cook Islands'
+164: 'Fiji'
+165: 'New Caledonia'
+166: 'New Zealand'
+167: 'Papua New Guinea'
+168: 'Samoa'
+169: 'Solomon Islands'
+170: 'Tahiti'
+171: 'Tonga'
+172: 'Vanuatu'
+176: 'Guam'
+184: 'Palau'
+189: 'Israel'
+190: 'Turkey'
+191: 'Albania'
+192: 'Andorra'
+193: 'Armenia'
+194: 'Austria'
+195: 'Azerbaijan'
+196: 'Belarus'
+197: 'Belgium'
+198: 'Bosnia and Herzegovina'
+199: 'Bulgaria'
+200: 'Croatia'
+201: 'Cyprus'
+202: 'Czech Republic'
+203: 'Denmark'
+204: 'England'
+205: 'Estonia'
+206: 'Faroe Islands'
+207: 'Finland'
+208: 'France'
+209: 'Georgia'
+210: 'Germany'
+211: 'Greece'
+212: 'Hungary'
+213: 'Iceland'
+214: 'Ireland'
+215: 'Italy'
+216: 'Kazakhstan'
+217: 'Latvia'
+218: 'Liechtenstein'
+219: 'Lithuania'
+220: 'Luxembourg'
+221: 'Macedonia'
+222: 'Malta'
+223: 'Moldova'
+224: 'Netherlands'
+225: 'Northern Ireland'
+226: 'Norway'
+227: 'Poland'
+228: 'Portugal'
+229: 'Romania'
+230: 'Russia'
+231: 'San Marino'
+232: 'Scotland'
+234: 'Slovakia'
+235: 'Slovenia'
+236: 'Spain'
+237: 'Sweden'
+238: 'Switzerland'
+239: 'Ukraine'
+240: 'Uzbekistan'
+241: 'Wales'
+245: 'Gibraltar'
+250: 'Monaco'
+260: 'Others'
+298: 'Taiwan'
+303: 'Serbia'
+304: 'Montenegro'
+310: 'Sint Maarten'
+311: 'Kosovo'
+312: 'South Sudan'
+</DropDownList>
+                  <VariableType>2 Bytes</VariableType>
+                  <Address>ptrPlayer</Address>
+                  <Offsets>
+                    <Offset>144</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>22</ID>
+                  <Description>"Weight (kg)"</Description>
+                  <VariableType>Binary</VariableType>
+                  <BitStart>0</BitStart>
+                  <BitLength>8</BitLength>
+                  <ShowAsBinary>0</ShowAsBinary>
+                  <Address>ptrPlayer</Address>
+                  <Offsets>
+                    <Offset>1</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>17</ID>
+                  <Description>"Height (cm)"</Description>
+                  <VariableType>Binary</VariableType>
+                  <BitStart>0</BitStart>
+                  <BitLength>8</BitLength>
+                  <ShowAsBinary>0</ShowAsBinary>
+                  <Address>ptrPlayer</Address>
+                  <Offsets>
+                    <Offset>0</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>56</ID>
+                  <Description>"Age"</Description>
+                  <VariableType>Binary</VariableType>
+                  <BitStart>0</BitStart>
+                  <BitLength>6</BitLength>
+                  <ShowAsBinary>0</ShowAsBinary>
+                  <Address>ptrPlayer</Address>
+                  <Offsets>
+                    <Offset>1C</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>131</ID>
+                  <Description>"Stronger Foot"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Right
+1:Left
+</DropDownList>
+                  <VariableType>Binary</VariableType>
+                  <BitStart>7</BitStart>
+                  <BitLength>1</BitLength>
+                  <ShowAsBinary>0</ShowAsBinary>
+                  <Address>ptrPlayer</Address>
+                  <Offsets>
+                    <Offset>3</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>89</ID>
+              <Description>"Positions"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>90</ID>
+                  <Description>"Registred Position"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:GK
+1:CB
+2:LB
+3:RB
+4:DMF
+5:CMF
+6:LMF
+7:RMF
+8:AMF
+9:LWF
+10:RWF
+11:SS
+12:CF
+</DropDownList>
+                  <VariableType>Binary</VariableType>
+                  <BitStart>4</BitStart>
+                  <BitLength>4</BitLength>
+                  <ShowAsBinary>0</ShowAsBinary>
+                  <Address>ptrPlayer</Address>
+                  <Offsets>
+                    <Offset>7</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>91</ID>
+                  <Description>"Playable Position"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>92</ID>
+                      <Description>"CF - Center Forward"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:C
+1:B
+2:A
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>1</BitStart>
+                      <BitLength>2</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>1F</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>93</ID>
+                      <Description>"SS - Second Striker"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:C
+1:B
+2:A
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>3</BitStart>
+                      <BitLength>2</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>1F</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>94</ID>
+                      <Description>"LWF - Left Wing Forward"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:C
+1:B
+2:A
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>5</BitStart>
+                      <BitLength>2</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>1f</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>95</ID>
+                      <Description>"RWF - Right Wing Forward"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:C
+1:B
+2:A
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>0</BitStart>
+                      <BitLength>2</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>20</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>96</ID>
+                      <Description>"AMF - Attacking Midfielder"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:C
+1:B
+2:A
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>2</BitStart>
+                      <BitLength>2</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>20</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>97</ID>
+                      <Description>"LMF - Left Midfielder"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:C
+1:B
+2:A
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>0</BitStart>
+                      <BitLength>2</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>21</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>98</ID>
+                      <Description>"RMF - Right Midfielder"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:C
+1:B
+2:A
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>2</BitStart>
+                      <BitLength>2</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>21</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>99</ID>
+                      <Description>"CMF - Center Midfielder"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:C
+1:B
+2:A
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>6</BitStart>
+                      <BitLength>2</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>20</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>100</ID>
+                      <Description>"DMF - Defensive Midfielder"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:C
+1:B
+2:A
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>4</BitStart>
+                      <BitLength>2</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>20</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>101</ID>
+                      <Description>"LB - Left Back"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:C
+1:B
+2:A
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>6</BitStart>
+                      <BitLength>2</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>21</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>102</ID>
+                      <Description>"RB - Right Back"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:C
+1:B
+2:A
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>0</BitStart>
+                      <BitLength>2</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>22</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>103</ID>
+                      <Description>"CB - Center Back"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:C
+1:B
+2:A
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>4</BitStart>
+                      <BitLength>2</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>21</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>104</ID>
+                      <Description>"GK - Goalkeeper"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:C
+1:B
+2:A
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>2</BitStart>
+                      <BitLength>2</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>22</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>108</ID>
+              <Description>"Abilities"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>109</ID>
+                  <Description>"Attributes"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>144</ID>
+                      <Description>"Weak Foot Usage"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0: 1
+1: 2
+2: 3
+3: 4
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>0</BitStart>
+                      <BitLength>2</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>23</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>145</ID>
+                      <Description>"Weak Foot Accuracy"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0: 1
+1: 2
+2: 3
+3: 4
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>4</BitStart>
+                      <BitLength>2</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>22</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>146</ID>
+                      <Description>"Form"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0: 1
+1: 2
+2: 3
+3: 4
+4: 5
+5: 6
+6: 7
+7: 8
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>4</BitStart>
+                      <BitLength>3</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>17</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>147</ID>
+                      <Description>"Injury Resistance"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0: 1
+1: 2
+2: 3
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>6</BitStart>
+                      <BitLength>2</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>22</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>115</ID>
+                      <Description>"Offensive Awareness"</Description>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>0</BitStart>
+                      <BitLength>7</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>3</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>117</ID>
+                      <Description>"Ball Control"</Description>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>5</BitStart>
+                      <BitLength>7</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>6</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>116</ID>
+                      <Description>"Dribbling"</Description>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>6</BitStart>
+                      <BitLength>7</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>5</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>118</ID>
+                      <Description>"Tight Possession"</Description>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>0</BitStart>
+                      <BitLength>7</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>8</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>119</ID>
+                      <Description>"Low Pass"</Description>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>6</BitStart>
+                      <BitLength>7</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>9</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>120</ID>
+                      <Description>"Lofted Pass"</Description>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>5</BitStart>
+                      <BitLength>7</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>A</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>122</ID>
+                      <Description>"Finishing"</Description>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>7</BitStart>
+                      <BitLength>7</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>8</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>121</ID>
+                      <Description>"Heading"</Description>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>0</BitStart>
+                      <BitLength>7</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>C</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>124</ID>
+                      <Description>"Place Kicking"</Description>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>5</BitStart>
+                      <BitLength>7</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>e</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>126</ID>
+                      <Description>"Curl"</Description>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>0</BitStart>
+                      <BitLength>7</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>127</ID>
+                      <Description>"Speed"</Description>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>7</BitStart>
+                      <BitLength>7</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>128</ID>
+                      <Description>"Acceleration"</Description>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>7</BitStart>
+                      <BitLength>7</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>129</ID>
+                      <Description>"Kicking Power"</Description>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>0</BitStart>
+                      <BitLength>7</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>130</ID>
+                      <Description>"Jump"</Description>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>6</BitStart>
+                      <BitLength>7</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>19</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>132</ID>
+                      <Description>"Physical Contact"</Description>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>6</BitStart>
+                      <BitLength>7</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>15</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>133</ID>
+                      <Description>"Balance"</Description>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>5</BitStart>
+                      <BitLength>7</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>16</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>134</ID>
+                      <Description>"Stamina"</Description>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>5</BitStart>
+                      <BitLength>7</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>1A</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>135</ID>
+                      <Description>"Defensive Awareness"</Description>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>0</BitStart>
+                      <BitLength>7</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>4</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>136</ID>
+                      <Description>"Ball Winning"</Description>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>7</BitStart>
+                      <BitLength>7</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>c</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>51</ID>
+                      <Description>"Aggression"</Description>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>6</BitStart>
+                      <BitLength>7</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>D</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>137</ID>
+                      <Description>"GK Awareness"</Description>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>7</BitStart>
+                      <BitLength>7</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>4</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>138</ID>
+                      <Description>"GK Catching"</Description>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>7</BitStart>
+                      <BitLength>7</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>139</ID>
+                      <Description>"GK Clearing"</Description>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>6</BitStart>
+                      <BitLength>7</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>11</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>140</ID>
+                      <Description>"GK Reflexes"</Description>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>5</BitStart>
+                      <BitLength>7</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>12</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>142</ID>
+                      <Description>"GK Reach"</Description>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>0</BitStart>
+                      <BitLength>7</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>183</ID>
+                  <Description>"Skills"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>107</ID>
+                      <Description>"Scissors Feint"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>3</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>24</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>149</ID>
+                      <Description>"Double Touch"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>0</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>29</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>150</ID>
+                      <Description>"Flip Flap"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>4</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>24</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>151</ID>
+                      <Description>"Marseille Turn"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>5</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>24</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>152</ID>
+                      <Description>"Sombrero"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>6</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>24</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>153</ID>
+                      <Description>"Cross Over Turn"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>1</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>29</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>113</ID>
+                      <Description>"Cut Behind &amp; Turn"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>7</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>24</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>114</ID>
+                      <Description>"Scotch Move"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>0</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>25</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>154</ID>
+                      <Description>"Step On Skill control"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>3</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>155</ID>
+                      <Description>"Heading"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>1</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>25</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>156</ID>
+                      <Description>"Long Range Drive"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>2</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>25</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>157</ID>
+                      <Description>"Chip shot control"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>2</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>181</ID>
+                      <Description>"Long Range Shooting"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>2</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>29</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>158</ID>
+                      <Description>"Knuckle Shot"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>3</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>25</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>159</ID>
+                      <Description>"Dipping Shot"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>4</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>160</ID>
+                      <Description>"Rising Shots"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>5</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>161</ID>
+                      <Description>"Acrobatic Finishing"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>4</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>25</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>123</ID>
+                      <Description>"Heel Trick"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>5</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>25</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>162</ID>
+                      <Description>"First-time Shot"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>6</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>25</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>125</ID>
+                      <Description>"One-touch Pass"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>7</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>25</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>182</ID>
+                      <Description>"Through Passing"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>3</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>29</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>163</ID>
+                      <Description>"Weighted Pass"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>0</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>26</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>164</ID>
+                      <Description>"Pinpoint Crossing"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>1</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>26</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>165</ID>
+                      <Description>"Outside Curler"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>2</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>26</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>166</ID>
+                      <Description>"Rabona"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>3</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>26</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>167</ID>
+                      <Description>"No Look Pass"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>7</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>27</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>168</ID>
+                      <Description>"Low Lofted Pass"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>4</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>26</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>169</ID>
+                      <Description>"GK Low Punt"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>5</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>26</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>170</ID>
+                      <Description>"GK High Punt"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>6</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>171</ID>
+                      <Description>"Long Throw"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>6</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>26</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>172</ID>
+                      <Description>"GK Long Throw"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>7</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>26</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>173</ID>
+                      <Description>"Penalty Specialist"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>0</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>174</ID>
+                      <Description>"GK Penalty Saver"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>1</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>175</ID>
+                      <Description>"Gamesmanship"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>0</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>27</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>176</ID>
+                      <Description>"Man Marking"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>1</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>27</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>177</ID>
+                      <Description>"Track Back"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>2</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>27</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>141</ID>
+                      <Description>"Interception"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>7</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>178</ID>
+                      <Description>"Acrobatic Clear"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>3</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>27</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>143</ID>
+                      <Description>"Captaincy"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>4</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>27</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>179</ID>
+                      <Description>"Super-Sub"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>5</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>27</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>180</ID>
+                      <Description>"Fighting Spirit"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>6</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>27</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>185</ID>
+                  <Description>"Playing Style"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:-
+1:Goal Poacher
+2:Dummy Runner
+3:Fox in the Box
+4:Profilic Winger
+5:Classic No. 10
+6:Hole Player
+7:Box-to-Box
+8:Anchor Man
+9:The Destroyer
+10:Extra Frontman
+11:Offensive Full-back
+12:Defensive Full-back
+13:Target Man
+14:Creative Playmaker
+15:Build Up
+16:Offensive Goalkeeper
+17:Defensive Goalkeeper
+18:Roaming Flank
+19:Cross Specialist
+20:Orchestrator
+21:Full-back Finisher
+</DropDownList>
+                  <VariableType>Binary</VariableType>
+                  <BitStart>3</BitStart>
+                  <BitLength>5</BitLength>
+                  <ShowAsBinary>0</ShowAsBinary>
+                  <Address>ptrPlayer</Address>
+                  <Offsets>
+                    <Offset>1D</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>188</ID>
+                  <Description>"COM Playing Styles"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>187</ID>
+                      <Description>"Trickster"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>7</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>1B</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>189</ID>
+                      <Description>"Mazing Run"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>7</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>1F</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>190</ID>
+                      <Description>"Speeding Bullet"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>6</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>23</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>191</ID>
+                      <Description>"Incisive Run"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>7</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>23</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>192</ID>
+                      <Description>"Long Ball Expert"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>0</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>24</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>193</ID>
+                      <Description>"Early Cross"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>1</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>24</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>194</ID>
+                      <Description>"Long Ranger"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>2</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>24</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>195</ID>
+              <Description>"Team Role"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>196</ID>
+                  <Description>"Team Role"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:-
+1:Youth Prospect
+2:Protégé
+3:Team Player
+4:Playmaker
+5:Star Player
+6:Leader
+7:General
+8:Creator
+9:Maestro
+10:Workhorse
+11:Smart Player
+12:Fighter
+13:Key Player
+14:Superstar
+15:Hero
+16:Virtuoso
+17:Conductor
+18:Bandiera
+19:Legend
+20:Rising Star
+21:Bad Boy
+22:Risk-Taker
+</DropDownList>
+                  <VariableType>Binary</VariableType>
+                  <BitStart>0</BitStart>
+                  <BitLength>5</BitLength>
+                  <ShowAsBinary>0</ShowAsBinary>
+                  <Address>ptrPlayer</Address>
+                  <Offsets>
+                    <Offset>150</Offset>
+                  </Offsets>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>515</ID>
+                      <Description>"Level"</Description>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>6</BitStart>
+                      <BitLength>2</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>143</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>516</ID>
+                  <Description>"Team Player - Lone Wolf"</Description>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>Byte</VariableType>
+                  <Address>ptrPlayer</Address>
+                  <Offsets>
+                    <Offset>151</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>519</ID>
+                  <Description>"Passion - Composure"</Description>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>Byte</VariableType>
+                  <Address>ptrPlayer</Address>
+                  <Offsets>
+                    <Offset>152</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>521</ID>
+                  <Description>"Technique - Strength"</Description>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>Byte</VariableType>
+                  <Address>ptrPlayer</Address>
+                  <Offsets>
+                    <Offset>153</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>520</ID>
+                  <Description>"Insight - Instinct"</Description>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>Byte</VariableType>
+                  <Address>ptrPlayer</Address>
+                  <Offsets>
+                    <Offset>154</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>518</ID>
+                  <Description>"Impact"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Byte</VariableType>
+                  <Address>ptrPlayer</Address>
+                  <Offsets>
+                    <Offset>155</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>522</ID>
+              <Description>"Contract"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>528</ID>
+                  <Description>"Annual Salary"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>536</ID>
+                      <Description>"Salary (Euro)"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>15C</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>523</ID>
+                  <Description>"Contract Ends"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>525</ID>
+                      <Description>"Year"</Description>
+                      <VariableType>2 Bytes</VariableType>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>138</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>527</ID>
+                      <Description>"Month"</Description>
+                      <VariableType>Byte</VariableType>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>13A</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>526</ID>
+                      <Description>"Day"</Description>
+                      <VariableType>Byte</VariableType>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>13B</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>539</ID>
+              <Description>"Other"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>538</ID>
+                  <Description>"Stamina Bar"</Description>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>Binary</VariableType>
+                  <BitStart>0</BitStart>
+                  <BitLength>7</BitLength>
+                  <ShowAsBinary>0</ShowAsBinary>
+                  <Address>ptrPlayer</Address>
+                  <Offsets>
+                    <Offset>146</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>646</ID>
+                  <Description>"Blinking Form Arrow"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>Binary</VariableType>
+                  <BitStart>7</BitStart>
+                  <BitLength>1</BitLength>
+                  <ShowAsBinary>0</ShowAsBinary>
+                  <Address>ptrPlayer</Address>
+                  <Offsets>
+                    <Offset>146</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>645</ID>
+                  <Description>"Form Arrow"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Terrible Form
+1:Poor Form
+2:Normal Form
+3:Good Form
+4:Top Form
+</DropDownList>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>Binary</VariableType>
+                  <BitStart>0</BitStart>
+                  <BitLength>3</BitLength>
+                  <ShowAsBinary>0</ShowAsBinary>
+                  <Address>ptrPlayer</Address>
+                  <Offsets>
+                    <Offset>147</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>541</ID>
+                  <Description>"Period Unavailable (days)"</Description>
+                  <VariableType>Byte</VariableType>
+                  <Address>ptrPlayer</Address>
+                  <Offsets>
+                    <Offset>148</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>543</ID>
+                  <Description>"Affection"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Byte</VariableType>
+                  <Address>ptrPlayer</Address>
+                  <Offsets>
+                    <Offset>13E</Offset>
+                  </Offsets>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>634</ID>
+                      <Description>"Max Affection (?)"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <VariableType>Binary</VariableType>
+                      <BitStart>0</BitStart>
+                      <BitLength>1</BitLength>
+                      <ShowAsBinary>0</ShowAsBinary>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>13F</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>545</ID>
+                  <Description>"Is Transfer Listed"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                  <VariableType>Binary</VariableType>
+                  <BitStart>1</BitStart>
+                  <BitLength>1</BitLength>
+                  <ShowAsBinary>0</ShowAsBinary>
+                  <Address>ptrPlayer</Address>
+                  <Offsets>
+                    <Offset>14A</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>546</ID>
+                  <Description>"Is Loan Listed"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                  <VariableType>Binary</VariableType>
+                  <BitStart>2</BitStart>
+                  <BitLength>1</BitLength>
+                  <ShowAsBinary>0</ShowAsBinary>
+                  <Address>ptrPlayer</Address>
+                  <Offsets>
+                    <Offset>14A</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>547</ID>
+                  <Description>"Is Listed Player"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                  <VariableType>Binary</VariableType>
+                  <BitStart>1</BitStart>
+                  <BitLength>1</BitLength>
+                  <ShowAsBinary>0</ShowAsBinary>
+                  <Address>ptrPlayer</Address>
+                  <Offsets>
+                    <Offset>13F</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>630</ID>
+                  <Description>"Market Value (Euro)"</Description>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>ptrPlayer</Address>
+                  <Offsets>
+                    <Offset>174</Offset>
+                  </Offsets>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>631</ID>
+                      <Description>"?"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <VariableType>Byte</VariableType>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>179</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>633</ID>
+                      <Description>"?"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <VariableType>Byte</VariableType>
+                      <Address>ptrPlayer</Address>
+                      <Offsets>
+                        <Offset>178</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>652</ID>
+          <Description>"Edit Club Budget"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : PES2021.exe
+  Version:
+  Date   : 2020-09-16
+  Author : Aranaktu
+
+  This script does blah blah blah
+}
+
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+aobscanmodule(INJECT_ClubBudget,PES2021.exe,8B 87 F4 CB 6E 01 89 45 C4) // should be unique
+alloc(newmem,$1000,"PES2021.exe"+E947D8)
+
+alloc(ptrBudget, 8)
+registersymbol(ptrBudget)
+ptrBudget:
+dq 00
+
+label(code)
+label(return)
+
+newmem:
+  mov [ptrBudget], rdi
+code:
+  mov eax,[rdi+016ECBF4]
+  jmp return
+
+INJECT_ClubBudget:
+  jmp newmem
+  nop
+return:
+registersymbol(INJECT_ClubBudget)
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+INJECT_ClubBudget:
+  db 8B 87 F4 CB 6E 01
+
+unregistersymbol(INJECT_ClubBudget)
+dealloc(newmem)
+unregistersymbol(ptrBudget)
+dealloc(ptrBudget)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "PES2021.exe"+EA4C58
+
+"PES2021.exe"+EA4C2D: 48 8B D8              -  mov rbx,rax
+"PES2021.exe"+EA4C30: E8 9B C7 FB FF        -  call PES2021.exe+E613D0
+"PES2021.exe"+EA4C35: 48 8B C8              -  mov rcx,rax
+"PES2021.exe"+EA4C38: 48 8B D3              -  mov rdx,rbx
+"PES2021.exe"+EA4C3B: E8 A0 D9 FB FF        -  call PES2021.exe+E625E0
+"PES2021.exe"+EA4C40: E8 8B C7 FB FF        -  call PES2021.exe+E613D0
+"PES2021.exe"+EA4C45: 48 8B C8              -  mov rcx,rax
+"PES2021.exe"+EA4C48: BA 02 00 00 00        -  mov edx,00000002
+"PES2021.exe"+EA4C4D: 41 B8 86 02 19 00     -  mov r8d,00190286
+"PES2021.exe"+EA4C53: E8 B8 EB FB FF        -  call PES2021.exe+E63810
+// ---------- INJECTING HERE ----------
+"PES2021.exe"+EA4C58: 8B 87 F4 CB 6E 01     -  mov eax,[rdi+016ECBF4]
+// ---------- DONE INJECTING  ----------
+"PES2021.exe"+EA4C5E: 89 45 C4              -  mov [rbp-3C],eax
+"PES2021.exe"+EA4C61: 48 8D 55 C4           -  lea rdx,[rbp-3C]
+"PES2021.exe"+EA4C65: 48 8D 4D D0           -  lea rcx,[rbp-30]
+"PES2021.exe"+EA4C69: E8 92 2F 6C 00        -  call PES2021.exe+1567C00
+"PES2021.exe"+EA4C6E: 48 8B D8              -  mov rbx,rax
+"PES2021.exe"+EA4C71: E8 5A C7 FB FF        -  call PES2021.exe+E613D0
+"PES2021.exe"+EA4C76: 48 8B C8              -  mov rcx,rax
+"PES2021.exe"+EA4C79: 4C 8B C3              -  mov r8,rbx
+"PES2021.exe"+EA4C7C: BA 02 00 00 00        -  mov edx,00000002
+"PES2021.exe"+EA4C81: E8 BA FF FB FF        -  call PES2021.exe+E64C40
+}
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>656</ID>
+              <Description>"Better Don't change :)"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>653</ID>
+                  <Description>"start"</Description>
+                  <ShowAsHex>1</ShowAsHex>
+                  <VariableType>8 Bytes</VariableType>
+                  <Address>ptrBudget</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>654</ID>
+              <Description>"Transfer Budget"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>ptrBudget</Address>
+              <Offsets>
+                <Offset>016ECBF4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>655</ID>
+              <Description>"Salary Budget"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>ptrBudget</Address>
+              <Offsets>
+                <Offset>16ecc08</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>669</ID>
+          <Description>"BAL Training"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : PES2021.exe
+  Version:
+  Date   : 2020-09-16
+  Author : Aranaktu
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+aobscanmodule(INJECT_TrainingOnEnter,PES2021.exe,49 8B 86 90 00 00 00 0F BE) // should be unique
+alloc(newmem,$1000,"PES2021.exe"+C0FC5B1)
+
+alloc(ptrFocusPoints, 8, "PES2021.exe"+C0FC5B1)
+registersymbol(ptrFocusPoints)
+ptrFocusPoints:
+dq 00
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov rax,[r14+00000090]
+  mov [ptrFocusPoints], rax
+  jmp return
+
+INJECT_TrainingOnEnter:
+  jmp newmem
+  nop
+  nop
+return:
+registersymbol(INJECT_TrainingOnEnter)
+
+aobscanmodule(INJECT_TrainingOnChange,PES2021.exe,0F BE 41 0A 2B C2) // should be unique
+alloc(newmem_onchange,$1000,"PES2021.exe"+C0FB881)
+
+label(code_onchange)
+label(ret_onchange)
+
+newmem_onchange:
+  mov [ptrFocusPoints], rcx
+
+code_onchange:
+  movsx eax,byte ptr [rcx+0A]
+  sub eax,edx
+  jmp ret_onchange
+
+INJECT_TrainingOnChange:
+  jmp newmem_onchange
+  nop
+ret_onchange:
+registersymbol(INJECT_TrainingOnChange)
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+INJECT_TrainingOnEnter:
+  db 49 8B 86 90 00 00 00
+
+unregistersymbol(INJECT_TrainingOnEnter)
+dealloc(newmem)
+
+INJECT_TrainingOnChange:
+  db 0F BE 41 0A 2B C2
+
+unregistersymbol(INJECT_TrainingOnChange)
+dealloc(newmem_onchange)
+
+{
+// ORIGINAL CODE - INJECT_TrainingOnEnterION POINT: "PES2021.exe"+C0FC5B1
+
+"PES2021.exe"+C0FC582: FF 90 50 02 00 00     -  call qword ptr [rax+00000250]
+"PES2021.exe"+C0FC588: 49 8B 06              -  mov rax,[r14]
+"PES2021.exe"+C0FC58B: BA 02 00 00 00        -  mov edx,00000002
+"PES2021.exe"+C0FC590: 4C 89 F1              -  mov rcx,r14
+"PES2021.exe"+C0FC593: FF 90 50 02 00 00     -  call qword ptr [rax+00000250]
+"PES2021.exe"+C0FC599: E8 D2 72 D5 F4        -  call PES2021.exe+E53870
+"PES2021.exe"+C0FC59E: 48 89 C1              -  mov rcx,rax
+"PES2021.exe"+C0FC5A1: BA 01 00 00 00        -  mov edx,00000001
+"PES2021.exe"+C0FC5A6: 41 B8 20 00 81 02     -  mov r8d,02810020
+"PES2021.exe"+C0FC5AC: E8 FF 96 D5 F4        -  call PES2021.exe+E55CB0
+// ---------- INJECT_TrainingOnEnterING HERE ----------
+"PES2021.exe"+C0FC5B1: 49 8B 86 90 00 00 00  -  mov rax,[r14+00000090]
+// ---------- DONE INJECT_TrainingOnEnterING  ----------
+"PES2021.exe"+C0FC5B8: 0F BE 58 0A           -  movsx ebx,byte ptr [rax+0A]
+"PES2021.exe"+C0FC5BC: E8 AF 72 D5 F4        -  call PES2021.exe+E53870
+"PES2021.exe"+C0FC5C1: 48 89 C1              -  mov rcx,rax
+"PES2021.exe"+C0FC5C4: 41 89 D8              -  mov r8d,ebx
+"PES2021.exe"+C0FC5C7: BA 01 00 00 00        -  mov edx,00000001
+"PES2021.exe"+C0FC5CC: E8 1F AC D5 F4        -  call PES2021.exe+E571F0
+"PES2021.exe"+C0FC5D1: 4C 89 F1              -  mov rcx,r14
+"PES2021.exe"+C0FC5D4: E8 57 89 D3 F4        -  call PES2021.exe+E34F30
+"PES2021.exe"+C0FC5D9: 48 8B 6C 24 38        -  mov rbp,[rsp+38]
+"PES2021.exe"+C0FC5DE: 48 8B 5C 24 30        -  mov rbx,[rsp+30]
+}
+
+{
+// ORIGINAL CODE - INJECTION POINT: "PES2021.exe"+BB35C1
+
+"PES2021.exe"+BB359D: 74 78                 -  je PES2021.exe+BB3617
+"PES2021.exe"+BB359F: 41 02 F7              -  add sil,r15l
+"PES2021.exe"+BB35A2: 45 33 C0              -  xor r8d,r8d
+"PES2021.exe"+BB35A5: 40 0F BE D6           -  movsx edx,sil
+"PES2021.exe"+BB35A9: 48 8B C8              -  mov rcx,rax
+"PES2021.exe"+BB35AC: E8 DF 6B 2A 00        -  call PES2021.exe+E5A190
+"PES2021.exe"+BB35B1: 48 8B 8F 90 00 00 00  -  mov rcx,[rdi+00000090]
+"PES2021.exe"+BB35B8: 41 0F BE D6           -  movsx edx,r14l
+"PES2021.exe"+BB35BC: 83 FB 0A              -  cmp ebx,0A
+"PES2021.exe"+BB35BF: 7D 14                 -  jnl PES2021.exe+BB35D5
+// ---------- INJECTING HERE ----------
+"PES2021.exe"+BB35C1: 0F BE 41 0A           -  movsx eax,byte ptr [rcx+0A]
+"PES2021.exe"+BB35C5: 2B C2                 -  sub eax,edx
+// ---------- DONE INJECTING  ----------
+"PES2021.exe"+BB35C7: 83 F8 15              -  cmp eax,15
+"PES2021.exe"+BB35CA: 77 09                 -  ja PES2021.exe+BB35D5
+"PES2021.exe"+BB35CC: 48 63 C3              -  movsxd  rax,ebx
+"PES2021.exe"+BB35CF: 00 14 08              -  add [rax+rcx],dl
+"PES2021.exe"+BB35D2: 28 51 0A              -  sub [rcx+0A],dl
+"PES2021.exe"+BB35D5: 48 8B 87 90 00 00 00  -  mov rax,[rdi+00000090]
+"PES2021.exe"+BB35DC: 0F BE 58 0A           -  movsx ebx,byte ptr [rax+0A]
+"PES2021.exe"+BB35E0: E8 EB DD 2A 00        -  call PES2021.exe+E613D0
+"PES2021.exe"+BB35E5: 48 8B C8              -  mov rcx,rax
+"PES2021.exe"+BB35E8: 44 8B C3              -  mov r8d,ebx
+}
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>670</ID>
+              <Description>"Focus Points"</Description>
+              <LastState Value="1" RealAddress="7FF4DB7FCBFA"/>
+              <VariableType>Byte</VariableType>
+              <Address>ptrFocusPoints</Address>
+              <Offsets>
+                <Offset>A</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>671</ID>
+          <Description>"Gameplay"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>0</ID>
+              <Description>"Match Time"</Description>
+              <Options moHideChildren="1"/>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : PES2021.exe
+  Version:
+  Date   : 2020-09-16
+  Author : Aranaktu
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+
+
+aobscanmodule(INJECT_MatchTime,PES2021.exe,8B 44 24 40 89 44 24 40) // should be unique
+alloc(newmem,$1000,"PES2021.exe"+7ABD593)
+
+alloc(MatchTime, 4, "PES2021.exe"+7ABD593)
+registersymbol(MatchTime)
+MatchTime:
+dd 00
+
+
+label(code)
+label(return)
+
+newmem:
+  mov eax, [MatchTime]
+  cmp eax, 0
+  je code
+  mov [rsp+40],eax
+
+code:
+  mov eax,[rsp+40]
+  mov [rsp+40],eax
+  jmp return
+
+INJECT_MatchTime:
+  jmp newmem
+  nop
+  nop
+  nop
+return:
+registersymbol(INJECT_MatchTime)
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+INJECT_MatchTime:
+  db 8B 44 24 40 89 44 24 40
+
+unregistersymbol(INJECT_MatchTime)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECT_MatchTimeION POINT: "PES2021.exe"+7ABD593
+
+"PES2021.exe"+7ABD571: 48 31 C1                       -  xor rcx,rax
+"PES2021.exe"+7ABD574: 41 0F B6 C1                    -  movzx eax,r9l
+"PES2021.exe"+7ABD578: 49 0F AF C8                    -  imul rcx,r8
+"PES2021.exe"+7ABD57C: 48 31 C1                       -  xor rcx,rax
+"PES2021.exe"+7ABD57F: 0F B6 C2                       -  movzx eax,dl
+"PES2021.exe"+7ABD582: 49 0F AF C8                    -  imul rcx,r8
+"PES2021.exe"+7ABD586: 48 31 C1                       -  xor rcx,rax
+"PES2021.exe"+7ABD589: 49 0F AF C8                    -  imul rcx,r8
+"PES2021.exe"+7ABD58D: 48 39 4B 10                    -  cmp [rbx+10],rcx
+"PES2021.exe"+7ABD591: 75 14                          -  jne PES2021.exe+7ABD5A7
+// ---------- INJECT_MatchTimeING HERE ----------
+"PES2021.exe"+7ABD593: 8B 44 24 40                    -  mov eax,[rsp+40]
+"PES2021.exe"+7ABD597: 89 44 24 40                    -  mov [rsp+40],eax
+// ---------- DONE INJECT_MatchTimeING  ----------
+"PES2021.exe"+7ABD59B: F3 0F 10 44 24 40              -  movss xmm0,[rsp+40]
+"PES2021.exe"+7ABD5A1: 48 83 C4 30                    -  add rsp,30
+"PES2021.exe"+7ABD5A5: 5B                             -  pop rbx
+"PES2021.exe"+7ABD5A6: C3                             -  ret
+"PES2021.exe"+7ABD5A7: 31 D2                          -  xor edx,edx
+"PES2021.exe"+7ABD5A9: 31 C9                          -  xor ecx,ecx
+"PES2021.exe"+7ABD5AB: E8 04 79 AB F9                 -  call PES2021.exe+1574EB4
+"PES2021.exe"+7ABD5B0: CC                             -  int 3
+"PES2021.exe"+7ABD5B1: CC                             -  int 3
+"PES2021.exe"+7ABD5B2: 41 BB FF FF FF FF              -  mov r11d,FFFFFFFF
+}
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>604</ID>
+                  <Description>"End current half"</Description>
+                  <LastState/>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+{$lua}
+getAddressList().getMemoryRecordByDescription("TIME").Value=166500
+sleep(1500)
+getAddressList().getMemoryRecordByDescription("TIME").Value=0
+{$asm}
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>605</ID>
+                  <Description>"Reset timer"</Description>
+                  <LastState/>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+{$lua}
+getAddressList().getMemoryRecordByDescription("TIME").Value=1
+sleep(1500)
+getAddressList().getMemoryRecordByDescription("TIME").Value=0
+{$asm}
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>4</ID>
+                  <Description>"TIME"</Description>
+                  <LastState Value="0" RealAddress="13FFB1000"/>
+                  <VariableType>Float</VariableType>
+                  <Address>MatchTime</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>662</ID>
+              <Description>"Unlimited Stamina"</Description>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : PES2021.exe
+  Version:
+  Date   : 2020-09-16
+  Author : Aranaktu
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+
+
+aobscanmodule(INJECT_UnlimitedStamina,PES2021.exe,F7 7D 18 48 83 C4 30) // should be unique
+alloc(newmem,$1000,"PES2021.exe"+7F2B341)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  idiv [rbp+18]
+  mov al, 64
+  add rsp,30
+  jmp return
+
+INJECT_UnlimitedStamina:
+  jmp newmem
+  nop
+  nop
+return:
+registersymbol(INJECT_UnlimitedStamina)
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+INJECT_UnlimitedStamina:
+  db F7 7D 18 48 83 C4 30
+
+unregistersymbol(INJECT_UnlimitedStamina)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECT_UnlimitedStaminaION POINT: "PES2021.exe"+7F2B341
+
+"PES2021.exe"+7F2B31B: 0F B6 C2              -  movzx eax,dl
+"PES2021.exe"+7F2B31E: 49 0F AF CB           -  imul rcx,r11
+"PES2021.exe"+7F2B322: 48 31 C1              -  xor rcx,rax
+"PES2021.exe"+7F2B325: 49 0F AF CB           -  imul rcx,r11
+"PES2021.exe"+7F2B329: 48 39 8B E8 00 00 00  -  cmp [rbx+000000E8],rcx
+"PES2021.exe"+7F2B330: 75 2C                 -  jne PES2021.exe+7F2B35E
+"PES2021.exe"+7F2B332: 6B 45 10 64           -  imul eax,[rbp+10],64
+"PES2021.exe"+7F2B336: 48 8B 5C 24 50        -  mov rbx,[rsp+50]
+"PES2021.exe"+7F2B33B: 48 8B 7C 24 58        -  mov rdi,[rsp+58]
+"PES2021.exe"+7F2B340: 99                    -  cdq
+// ---------- INJECT_UnlimitedStaminaING HERE ----------
+"PES2021.exe"+7F2B341: F7 7D 18              -  idiv [rbp+18]
+"PES2021.exe"+7F2B344: 48 83 C4 30           -  add rsp,30
+// ---------- DONE INJECT_UnlimitedStaminaING  ----------
+"PES2021.exe"+7F2B348: 5D                    -  pop rbp
+"PES2021.exe"+7F2B349: C3                    -  ret
+"PES2021.exe"+7F2B34A: 31 D2                 -  xor edx,edx
+"PES2021.exe"+7F2B34C: 31 C9                 -  xor ecx,ecx
+"PES2021.exe"+7F2B34E: E8 61 9B 64 F9        -  call PES2021.exe+1574EB4
+"PES2021.exe"+7F2B353: CC                    -  int 3
+"PES2021.exe"+7F2B354: 31 D2                 -  xor edx,edx
+"PES2021.exe"+7F2B356: 31 C9                 -  xor ecx,ecx
+"PES2021.exe"+7F2B358: E8 57 9B 64 F9        -  call PES2021.exe+1574EB4
+"PES2021.exe"+7F2B35D: CC                    -  int 3
+}
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>636</ID>
+      <Description>"Support me on Patreon"</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <Color>0000FF</Color>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>637</ID>
+          <Description>"https://www.patreon.com/xAranaktu"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
